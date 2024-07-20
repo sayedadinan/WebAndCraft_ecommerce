@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
-import 'package:webandcrafts_project/view/utils/constants/custom_text.dart';
 import 'package:webandcrafts_project/view/utils/constants/mediaquery.dart';
 import 'package:webandcrafts_project/view/utils/constants/sized_box.dart';
+import 'package:webandcrafts_project/view/widgets/category_widget.dart';
+import 'package:webandcrafts_project/view/widgets/feutured_widget.dart';
 import 'package:webandcrafts_project/view/widgets/home_appbar.dart';
 import 'package:webandcrafts_project/view/widgets/mostpopular_widget.dart';
 import 'package:webandcrafts_project/view/widgets/slider_banner_widget.dart';
@@ -13,11 +15,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize:
-                Size(double.infinity, mediaqueryheight(0.08, context)),
-            child: const CustomHomeAppbar()),
-        body: Column(children: [
+      appBar: PreferredSize(
+          preferredSize: Size(double.infinity, mediaqueryheight(0.08, context)),
+          child: const CustomHomeAppbar()),
+      body: SingleChildScrollView(
+        child: Column(children: [
           SizedBox(
               height: mediaqueryheight(0.20, context),
               child: PageViewWithIndicator()),
@@ -35,18 +37,24 @@ class HomeScreen extends StatelessWidget {
               color: AppColors.appBarColor,
             ),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomText(
-                  text: 'Most Popular',
-                  size: 0.04,
-                  color: AppColors.blackColor),
-              CustomSizedBoxWidth(0.25),
-              CustomText(
-                  text: 'View all', size: 0.03, color: AppColors.blackColor),
-            ],
-          ),
-        ]));
+          const CategoryWidget(),
+          const CustomSizedBoxHeight(0.02),
+          const FeuturedWIdget()
+        ]),
+      ),
+      bottomNavigationBar: MotionTabBar(
+        // controller:
+        //     _motionTabBarController, // Add this controller if you need to change your tab programmatically
+        initialSelectedTab: "Home",
+        useSafeArea: true,
+        labels: const ["Home", "Dashboard", "Profile", "Settings"],
+        icons: const [
+          Icons.dashboard,
+          Icons.home,
+          Icons.people_alt,
+          Icons.settings
+        ],
+      ),
+    );
   }
 }
