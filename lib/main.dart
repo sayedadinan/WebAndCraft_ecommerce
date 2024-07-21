@@ -1,10 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webandcrafts_project/view/screens/bottom_nav.dart';
 import 'package:webandcrafts_project/view/screens/home_screen/home_screen.dart';
 import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
 void main() async {
+  // sqfliteFfiInit();
+
+  // databaseFactory = databaseFactoryFfi;
+  // sqfliteFfiInit();
   WidgetsFlutterBinding.ensureInitialized();
 
   // Set the custom HttpOverrides
@@ -30,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const BottomBar(),
     );
   }
 }

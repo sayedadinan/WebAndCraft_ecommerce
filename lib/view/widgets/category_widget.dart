@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
@@ -61,8 +62,13 @@ class CategoryWidget extends StatelessWidget {
                                 SizedBox(
                                   height: mediaqueryheight(0.06, context),
                                   width: mediaquerywidth(0.20, context),
-                                  child: Image.network(
-                                    categoryList.contents[index].imageUrl,
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        categoryList.contents[index].imageUrl,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
                                   ),
                                 ),
                               ],

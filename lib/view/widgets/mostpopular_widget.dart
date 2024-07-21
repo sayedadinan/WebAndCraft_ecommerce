@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
 import 'package:webandcrafts_project/view/utils/constants/custom_text.dart';
@@ -19,6 +19,7 @@ class MostPopularWidget extends StatelessWidget {
         Provider.of<ProductProvider>(context, listen: true);
     return Column(
       children: [
+        const CustomSizedBoxHeight(0.01),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -32,7 +33,7 @@ class MostPopularWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: mediaquerywidth(0.04, context)),
           child: SizedBox(
-            height: mediaqueryheight(0.36, context),
+            height: mediaqueryheight(0.38, context),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: productsViewModel.popularProductsList.length,
@@ -63,8 +64,13 @@ class MostPopularWidget extends StatelessWidget {
                                 SizedBox(
                                   height: mediaqueryheight(0.10, context),
                                   width: mediaquerywidth(0.30, context),
-                                  child: Image.network(
-                                    products.contents[index].productImage,
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        products.contents[index].productImage,
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                   ),
                                 ),
                               ],

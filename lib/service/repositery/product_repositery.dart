@@ -15,7 +15,7 @@ class ProductRepository {
     try {
       final response = await productService.fetchProductDetails();
 
-      List<FeuturedProductList> featuredproductLists = [];
+      List<FeaturedProductList> featuredproductLists = [];
       List<PopularProducts> popularProductsList = [];
       List<Categories> categoriesList = [];
       List<BannerSlider> bannerSlidersList = [];
@@ -29,7 +29,7 @@ class ProductRepository {
               popularProductsList.add(PopularProducts.fromJson(item));
               log('Added to popularProductsList: ${item['title']}');
             } else if (item['title'] == 'Most Popular') {
-              featuredproductLists.add(FeuturedProductList.fromJson(item));
+              featuredproductLists.add(FeaturedProductList.fromJson(item));
               log('Added to featuredproductLists: ${item['title']}');
             }
             break;

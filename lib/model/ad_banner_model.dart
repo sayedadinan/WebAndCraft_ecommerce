@@ -28,4 +28,22 @@ class BannerSingle {
       'id': id,
     };
   }
+
+  Map<String, dynamic> toDatabaseJson() {
+    return {
+      'id': id,
+      'type': type,
+      'title': title,
+      'image_url': imageUrl,
+    };
+  }
+
+  factory BannerSingle.fromDatabaseJson(Map<String, dynamic> json) {
+    return BannerSingle(
+      type: json['type'],
+      title: json['title'],
+      imageUrl: json['image_url'],
+      id: json['id'],
+    );
+  }
 }

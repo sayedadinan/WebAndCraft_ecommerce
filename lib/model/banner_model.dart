@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class BannerSlider {
   String type;
   String title;
@@ -30,6 +32,28 @@ class BannerSlider {
       'contents': contents.map((content) => content.toJson()).toList(),
       'id': id,
     };
+  }
+
+  Map<String, dynamic> toDatabaseJson() {
+    return {
+      'id': id,
+      'type': type,
+      'title': title,
+      'contents':
+          jsonEncode(contents.map((content) => content.toJson()).toList()),
+    };
+  }
+
+  factory BannerSlider.fromDatabaseJson(Map<String, dynamic> json) {
+    var list = jsonDecode(json['contents']) as List;
+    List<Content> contentsList = list.map((i) => Content.fromJson(i)).toList();
+
+    return BannerSlider(
+      type: json['type'],
+      title: json['title'],
+      contents: contentsList,
+      id: json['id'],
+    );
   }
 }
 

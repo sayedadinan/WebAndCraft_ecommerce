@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -15,13 +16,13 @@ class PageViewWithIndicator extends StatelessWidget {
     final productsViewModel =
         Provider.of<ProductProvider>(context, listen: true);
     return SizedBox(
-      height: mediaqueryheight(0.03, context),
+      height: mediaqueryheight(0.23, context),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           PageView.builder(
             controller: adController,
-            itemCount: 1,
+            itemCount: 3,
             itemBuilder: (context, index) {
               final sliderBannerList =
                   productsViewModel.bannerSlidersList[index];
@@ -38,8 +39,12 @@ class PageViewWithIndicator extends StatelessWidget {
                     //   fit: BoxFit.cover,
                     // ),
                   ),
-                  child: Image.network(
-                    sliderBannerList.contents[0].imageUrl,
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    imageUrl: sliderBannerList.contents[index].imageUrl,
                     fit: BoxFit.cover,
                   ),
                 );

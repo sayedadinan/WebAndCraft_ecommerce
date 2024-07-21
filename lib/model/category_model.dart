@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Categories {
   String type;
   String title;
@@ -31,6 +33,29 @@ class Categories {
       'contents': contents.map((category) => category.toJson()).toList(),
       'id': id,
     };
+  }
+
+  Map<String, dynamic> toDatabaseJson() {
+    return {
+      'id': id,
+      'type': type,
+      'title': title,
+      'contents':
+          jsonEncode(contents.map((category) => category.toJson()).toList()),
+    };
+  }
+
+  factory Categories.fromDatabaseJson(Map<String, dynamic> json) {
+    var list = jsonDecode(json['contents']) as List;
+    List<Category> categoriesList =
+        list.map((i) => Category.fromJson(i)).toList();
+
+    return Categories(
+      type: json['type'],
+      title: json['title'],
+      contents: categoriesList,
+      id: json['id'],
+    );
   }
 }
 
