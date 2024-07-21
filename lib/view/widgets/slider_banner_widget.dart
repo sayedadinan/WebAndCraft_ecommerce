@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
 import 'package:webandcrafts_project/view/utils/constants/mediaquery.dart';
+import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
 class PageViewWithIndicator extends StatelessWidget {
   final PageController adController = PageController();
@@ -10,6 +12,8 @@ class PageViewWithIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsViewModel =
+        Provider.of<ProductProvider>(context, listen: true);
     return SizedBox(
       height: mediaqueryheight(0.03, context),
       child: Stack(
@@ -17,15 +21,40 @@ class PageViewWithIndicator extends StatelessWidget {
         children: [
           PageView.builder(
             controller: adController,
-            itemCount: 4,
+            itemCount: 1,
             itemBuilder: (context, index) {
-              return Container(
-                decoration: const BoxDecoration(
+              final sliderBannerList =
+                  productsViewModel.bannerSlidersList[index];
+
+              // Check if the contents list is not empty
+              if (sliderBannerList.contents.isNotEmpty) {
+                // final imageUrl = sliderBannerList.contents[index].imageUrl;
+
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.blackColor,
+                    // image: DecorationImage(
+                    //   image: NetworkImage(AppI),
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  child: Image.network(
+                    sliderBannerList.contents[0].imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              } else {
+                // Handle the case where contents might be empty
+                return Container(
                   color: AppColors.blackColor,
-                  // image: const DecorationImage(
-                  //     image: NetworkImage(url), fit: BoxFit.cover),
-                ),
-              );
+                  child: Center(
+                    child: Text(
+                      'No image available',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                );
+              }
             },
           ),
           Positioned(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
 import 'package:webandcrafts_project/view/utils/constants/custom_text.dart';
 import 'package:webandcrafts_project/view/utils/constants/mediaquery.dart';
 import 'package:webandcrafts_project/view/utils/constants/sized_box.dart';
 import 'package:webandcrafts_project/view/widgets/rating_star_widget.dart';
+import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
 class MostPopularWidget extends StatelessWidget {
   const MostPopularWidget({
@@ -12,6 +15,8 @@ class MostPopularWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsViewModel =
+        Provider.of<ProductProvider>(context, listen: true);
     return Column(
       children: [
         const Row(
@@ -27,11 +32,12 @@ class MostPopularWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: mediaquerywidth(0.04, context)),
           child: SizedBox(
-            height: mediaqueryheight(0.30, context),
+            height: mediaqueryheight(0.36, context),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 3,
+              itemCount: productsViewModel.popularProductsList.length,
               itemBuilder: (context, index) {
+                final products = productsViewModel.popularProductsList[index];
                 return GestureDetector(
                   onTap: () {},
                   child: Padding(
@@ -58,7 +64,7 @@ class MostPopularWidget extends StatelessWidget {
                                   height: mediaqueryheight(0.10, context),
                                   width: mediaquerywidth(0.30, context),
                                   child: Image.network(
-                                    'https://m.media-amazon.com/images/I/413Oc6gWWoL._AC_UF1000,1000_QL80_.jpg',
+                                    products.contents[index].productImage,
                                   ),
                                 ),
                               ],
@@ -70,32 +76,39 @@ class MostPopularWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12)),
                               width: mediaquerywidth(0.23, context),
                               height: mediaqueryheight(0.04, context),
-                              child: const Center(
+                              child: Center(
                                 child: CustomText(
-                                    text: 'Sales 65% Off',
+                                    text:
+                                        'Sales ${products.contents[index].discount}',
                                     size: 0.02,
                                     color: Colors.white),
                               ),
                             ),
                             const CustomSizedBoxHeight(0.01),
-                            const CustomText(
-                                text: 'Lenovo K3 Mini Outdoor Wireless Speaker',
+                            CustomText(
+                                text: products.contents[index].productName,
                                 size: 0.02,
                                 color: AppColors.blackColor),
                             const CustomSizedBoxHeight(0.01),
-                            RatingStars(rating: 4),
+                            RatingStars(
+                              rating: products.contents[index].productRating,
+                            ),
                             const CustomSizedBoxHeight(0.01),
-                            const Row(
+                            Row(
                               children: [
                                 CustomText(
-                                    text: '₹100',
+                                    text: products.contents[index].offerPrice,
                                     size: 0.03,
                                     color: AppColors.blackColor),
-                                CustomSizedBoxWidth(0.01),
-                                AppdecorText(
-                                    text: '₹200',
-                                    size: 0.03,
-                                    color: AppColors.blackColor)
+                                const CustomSizedBoxWidth(0.01),
+                                SizedBox(
+                                  width: mediaquerywidth(0.12, context),
+                                  child: AppdecorText(
+                                      text:
+                                          products.contents[index].actualPrice,
+                                      size: 0.03,
+                                      color: AppColors.blackColor),
+                                )
                               ],
                             )
                           ],

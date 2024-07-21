@@ -1,8 +1,21 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webandcrafts_project/view/screens/home_screen/home_screen.dart';
+import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Set the custom HttpOverrides
+  HttpOverrides.global = MyHttpOverrides();
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProductProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,5 +32,14 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

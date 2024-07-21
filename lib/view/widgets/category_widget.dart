@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webandcrafts_project/view/utils/color_theme/colors.dart';
 import 'package:webandcrafts_project/view/utils/constants/custom_text.dart';
 import 'package:webandcrafts_project/view/utils/constants/mediaquery.dart';
 import 'package:webandcrafts_project/view/utils/constants/sized_box.dart';
+import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({
@@ -11,6 +13,8 @@ class CategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productsViewModel =
+        Provider.of<ProductProvider>(context, listen: true);
     return Column(
       children: [
         const Row(
@@ -29,8 +33,9 @@ class CategoryWidget extends StatelessWidget {
             height: mediaqueryheight(0.14, context),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 3,
+              itemCount: productsViewModel.categoriesList.length,
               itemBuilder: (context, index) {
+                final categoryList = productsViewModel.categoriesList[index];
                 return GestureDetector(
                   onTap: () {},
                   child: Padding(
@@ -57,18 +62,18 @@ class CategoryWidget extends StatelessWidget {
                                   height: mediaqueryheight(0.06, context),
                                   width: mediaquerywidth(0.20, context),
                                   child: Image.network(
-                                    'https://m.media-amazon.com/images/I/413Oc6gWWoL._AC_UF1000,1000_QL80_.jpg',
+                                    categoryList.contents[index].imageUrl,
                                   ),
                                 ),
                               ],
                             ),
                             const CustomSizedBoxHeight(0.01),
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CustomText(
                                     textAlign: TextAlign.center,
-                                    text: 'Grocery & Foods',
+                                    text: categoryList.contents[index].title,
                                     size: 0.02,
                                     color: AppColors.blackColor),
                               ],
