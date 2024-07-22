@@ -29,15 +29,9 @@ class PageViewWithIndicator extends StatelessWidget {
 
               // Check if the contents list is not empty
               if (sliderBannerList.contents.isNotEmpty) {
-                // final imageUrl = sliderBannerList.contents[index].imageUrl;
-
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.blackColor,
-                    // image: DecorationImage(
-                    //   image: NetworkImage(AppI),
-                    //   fit: BoxFit.cover,
-                    // ),
                   ),
                   child: CachedNetworkImage(
                     placeholder: (context, url) =>
@@ -49,10 +43,10 @@ class PageViewWithIndicator extends StatelessWidget {
                   ),
                 );
               } else {
-                // Handle the case where contents might be empty
+            
                 return Container(
                   color: AppColors.blackColor,
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'No image available',
                       style: TextStyle(color: Colors.white),

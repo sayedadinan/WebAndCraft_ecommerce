@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:webandcrafts_project/service/data/api/home_api.dart';
 
 class ProductService {
   Future<List<dynamic>> fetchProductDetails() async {
-    const url = 'https://64bfc2a60d8e251fd111630f.mockapi.io/api/Todo';
-
+    //fetching the data from the api and the api url written in another file
+    const url = API.homeApi;
     try {
       final response = await http.get(Uri.parse(url));
 

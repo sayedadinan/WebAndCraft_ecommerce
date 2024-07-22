@@ -21,7 +21,7 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _motionTabBarController =
-        MotionTabBarController(initialIndex: 1, length: 5, vsync: this);
+        MotionTabBarController(initialIndex: 0, length: 5, vsync: this);
   }
 
   @override
@@ -52,10 +52,10 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
           color: Colors.black,
           fontWeight: FontWeight.w500,
         ),
-        tabIconColor: Colors.blue[600],
+        tabIconColor: Colors.black,
         tabIconSize: 28.0,
         tabIconSelectedSize: 26.0,
-        tabSelectedColor: Colors.blue[900],
+        tabSelectedColor: Colors.black,
         tabIconSelectedColor: Colors.white,
         tabBarColor: Colors.white,
         onTabItemSelected: (int value) {
@@ -67,11 +67,12 @@ class _BottomBarState extends State<BottomBar> with TickerProviderStateMixin {
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _motionTabBarController,
-        children: <Widget>[
-          // MainPageContentComponent(
-          //     title: "HomeSreen", controller: _motionTabBarController),
-          const HomeScreen(),
-          CartScreen(), OffersScreen(), AccountScreen(), CategoryScreen(),
+        children: const <Widget>[
+          HomeScreen(),
+          CartScreen(),
+          OffersScreen(),
+          AccountScreen(),
+          CategoryScreen(),
         ],
       ),
     );

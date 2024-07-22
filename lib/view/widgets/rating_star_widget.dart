@@ -5,7 +5,7 @@ import 'package:webandcrafts_project/view/utils/constants/mediaquery.dart';
 class RatingStars extends StatelessWidget {
   final int rating;
 
-  RatingStars({required this.rating});
+  const RatingStars({super.key, required this.rating});
 
   @override
   Widget build(BuildContext context) {

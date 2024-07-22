@@ -36,7 +36,7 @@ class FeuturedWIdget extends StatelessWidget {
           child: SizedBox(
             height: mediaqueryheight(0.35, context),
             child: ListView.builder(
-              //'ifweneed then we canuse the future builderal so and we can easily do this and   smake us very easy to study
+              //'if we need then we canuse the future buildera so and we can easily do this and   smake us very easy to study
               scrollDirection: Axis.horizontal,
               itemCount: productsViewModel.featuredProducts.length,
               itemBuilder: (context, index) {
@@ -69,10 +69,10 @@ class FeuturedWIdget extends StatelessWidget {
                                   child: CachedNetworkImage(
                                     imageUrl:
                                         products.contents[index].productImage,
-                                    placeholder: (context, url) =>const Center(
+                                    placeholder: (context, url) => const Center(
                                         child: CircularProgressIndicator()),
                                     errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                        const Icon(Icons.error),
                                   ),
                                 ),
                               ],

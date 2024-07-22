@@ -50,36 +50,6 @@ class DatabaseHelper {
         contents TEXT
       )
     ''');
-    await datebase.execute('''
-      CREATE TABLE slider_banner_image (
-      id TEXT PRIMARY KEY,
-      image TEXT,
-      )
-    ''');
-    await datebase.execute('''
-      CREATE TABLE mostpopular_image(
-      id TEXT PRIMARY KEY,
-      image TEXT,
-      )
-    ''');
-    await datebase.execute('''
-      CREATE TABLE off_percentage (
-      id TEXT PRIMARY KEY,
-      image TEXT,
-      )
-    ''');
-    await datebase.execute('''
-      CREATE TABLE category_image (
-      id TEXT PRIMARY KEY,
-      image TEXT,
-      )
-    ''');
-    await datebase.execute('''
-      CREATE TABLE feutured_product (
-      id TEXT PRIMARY KEY,
-      image TEXT,
-      )
-    ''');
   }
 
   Future<void> insertData(String table, Map<String, dynamic> data) async {

@@ -68,7 +68,7 @@ class CategoryWidget extends StatelessWidget {
                                     placeholder: (context, url) => const Center(
                                         child: CircularProgressIndicator()),
                                     errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
+                                        const Icon(Icons.error),
                                   ),
                                 ),
                               ],

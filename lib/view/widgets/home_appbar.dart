@@ -20,11 +20,6 @@ class CustomHomeAppbar extends StatelessWidget {
             color: AppColors.blackColor,
             size: mediaquerywidth(0.08, context),
           ),
-          // Transform.scale(
-          //     scaleX: 1.0,
-          //     scaleY: 1.3,
-          //     // scale: 1.0,
-          //     child: Image.asset(AppImages.cartImage)),
           SizedBox(
               height: mediaqueryheight(0.05, context),
               width: mediaquerywidth(0.62, context),

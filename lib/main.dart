@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webandcrafts_project/view/screens/bottom_nav.dart';
-import 'package:webandcrafts_project/view/screens/home_screen/home_screen.dart';
+import 'package:webandcrafts_project/view/utils/bottom_nav.dart';
 import 'package:webandcrafts_project/view_model/product_view_model.dart';
 
 void main() async {
